@@ -1,8 +1,6 @@
-import Image from "next/image";
 import { Inter } from "next/font/google";
-import { Auth } from "@supabase/auth-ui-react";
-import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
+import Landing from "@/components/Landing";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,18 +13,15 @@ export default function Home() {
   const session = useSession();
   const supabase = useSupabaseClient();
   return (
-    <div>
+    <>
       {!session ? (
-        <div>
-          <p>Not Logged In</p>
-          <button onClick={signInWithGoogle}>Log in with google</button>
-        </div>
+        <Landing authenticate={signInWithGoogle} />
       ) : (
         <div>
           <p>Account page will go here.</p>
           <button onClick={() => supabase.auth.signOut()}>Sign Out</button>
         </div>
       )}
-    </div>
+    </>
   );
 }
