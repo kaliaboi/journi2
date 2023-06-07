@@ -2,7 +2,7 @@
 
 import { FC } from "react";
 import Lottie from "lottie-react";
-import animation from "../public/transistor-man-sitting-and-looking-at-smartphone.json";
+import animation from "../public/main.json";
 
 const MainAnimation: FC = ({}) => {
   return <Lottie className="h-56" animationData={animation} loop={true} />;

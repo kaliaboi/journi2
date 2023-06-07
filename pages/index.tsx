@@ -1,26 +1,33 @@
-import { Inter } from "next/font/google";
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import Landing from "@/components/Landing";
-
-const inter = Inter({ subsets: ["latin"] });
+import JournalHome from "@/components/Home";
 
 export default function Home() {
   async function signInWithGoogle() {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: "google",
     });
+    if (error) {
+      console.log(error);
+    }
+  }
+
+  async function signInWithDiscord() {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: "discord",
+    });
+    if (error) {
+      console.log(error);
+    }
   }
   const session = useSession();
   const supabase = useSupabaseClient();
   return (
     <>
       {!session ? (
-        <Landing authenticate={signInWithGoogle} />
+        <Landing google={signInWithGoogle} discord={signInWithDiscord} />
       ) : (
-        <div>
-          <p>Account page will go here.</p>
-          <button onClick={() => supabase.auth.signOut()}>Sign Out</button>
-        </div>
+        <JournalHome />
       )}
     </>
   );
