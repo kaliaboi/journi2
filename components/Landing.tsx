@@ -30,7 +30,7 @@ export default function Landing({ google, discord }: any) {
             <div className="w-full flex justify-around">
               <div className="flex gap-4">
                 <Image src="/google.png" alt="" width={20} height={20} />
-                Continue with Google
+                Login with Google
               </div>
             </div>
           </Button>
